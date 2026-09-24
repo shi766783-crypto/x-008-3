@@ -40,6 +40,7 @@ import IconChart from './IconChart.vue'
 import DashboardView from '../views/DashboardView.vue'
 import AccountsView from '../views/AccountsView.vue'
 import TransactionsView from '../views/TransactionsView.vue'
+import RecurringBillsView from '../views/RecurringBillsView.vue'
 import BudgetView from '../views/BudgetView.vue'
 import SavingsGoalsView from '../views/SavingsGoalsView.vue'
 import ChallengesView from '../views/ChallengesView.vue'
@@ -50,6 +51,7 @@ const NAV = [
   { key: 'dashboard', label: '财务看板', icon: 'chart' },
   { key: 'accounts', label: '我的账户', icon: 'account' },
   { key: 'transactions', label: '记账', icon: 'add' },
+  { key: 'recurring', label: '周期账单', icon: 'calendar' },
   { key: 'budget', label: '月度预算', icon: 'target' },
   { key: 'goals', label: '储蓄目标', icon: 'list' },
   { key: 'challenges', label: '记账挑战', icon: 'trophy' },
@@ -61,6 +63,7 @@ const VIEWS = {
   dashboard: DashboardView,
   accounts: AccountsView,
   transactions: TransactionsView,
+  recurring: RecurringBillsView,
   budget: BudgetView,
   goals: SavingsGoalsView,
   challenges: ChallengesView,
@@ -76,6 +79,7 @@ export default {
     const sidebarOpen = ref(false)
 
     refresh()
+    controllersApi.recurring.generateDueBills()
     controllersApi.achievement.updateAchievements()
     refresh()
 
@@ -89,6 +93,7 @@ export default {
       if (!confirm('确认清除全部本地数据并重置为演示数据？')) return
       localStorage.clear()
       controllersApi.seed.seedDemoData()
+      controllersApi.recurring.generateDueBills()
       refresh()
     }
     return { store, tab, sidebarOpen, NAV, currentView, currentLabel, go, resetAll }

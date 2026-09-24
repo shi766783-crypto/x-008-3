@@ -4,6 +4,7 @@ import { todayStr, toDateStr } from '../../core/utils.js'
 import { loadAccounts, saveAccounts } from './accountController.js'
 import { saveTransactions } from './transactionController.js'
 import { saveBudgets } from './budgetController.js'
+import { saveRecurringBills } from './recurringController.js'
 import { saveGoals } from './savingsGoalController.js'
 import { saveUser } from './userController.js'
 
@@ -85,6 +86,57 @@ export function seedDemoData() {
     { id: genId('bdg'), category: '娱乐', month: cur, limit: 600 },
     { id: genId('bdg'), category: '人情', month: cur, limit: 800 },
     { id: genId('bdg'), category: '其他', month: cur, limit: 600 }
+  ])
+
+  function dateThisMonth(day) {
+    const now = new Date()
+    const d = new Date(now.getFullYear(), now.getMonth(), day)
+    return toDateStr(d)
+  }
+
+  saveRecurringBills([
+    {
+      id: genId('rcr'),
+      name: '每月房租',
+      type: TRANSACTION_TYPES.EXPENSE,
+      accountId: alipay.id,
+      amount: 1800,
+      category: '住房',
+      period: 'monthly',
+      startDate: dateThisMonth(1),
+      note: '',
+      active: true,
+      createdAt: Date.now() - idCounter * 1000,
+      generatedDates: []
+    },
+    {
+      id: genId('rcr'),
+      name: '水电燃气费',
+      type: TRANSACTION_TYPES.EXPENSE,
+      accountId: wechat.id,
+      amount: 260,
+      category: '住房',
+      period: 'monthly',
+      startDate: dateThisMonth(8),
+      note: '水电费均摊',
+      active: true,
+      createdAt: Date.now() - idCounter * 1000,
+      generatedDates: []
+    },
+    {
+      id: genId('rcr'),
+      name: '月度工资',
+      type: TRANSACTION_TYPES.INCOME,
+      accountId: bank.id,
+      amount: 12000,
+      category: '工资',
+      period: 'monthly',
+      startDate: dateThisMonth(10),
+      note: '公司固定发薪',
+      active: true,
+      createdAt: Date.now() - idCounter * 1000,
+      generatedDates: []
+    }
   ])
 
   const target = new Date()

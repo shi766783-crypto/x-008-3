@@ -18,6 +18,14 @@ export const EXPENSE_CATEGORIES = ['餐饮', '交通', '购物', '住房', '医�
 
 export const BUDGET_WARN_RATIO = 0.8
 
+export const RECUR_PERIODS = [
+  { value: 'weekly', label: '每周' },
+  { value: 'monthly', label: '每月' },
+  { value: 'yearly', label: '每年' }
+]
+
+export const LARGE_EXPENSE_THRESHOLD = 1000
+
 export const CHALLENGE_STREAKS = [7, 30]
 
 export const DEFAULT_GOAL_TYPE = 'savings'
@@ -28,6 +36,7 @@ export const STORAGE_KEYS = {
   accounts: 'ffm.accounts',
   transactions: 'ffm.transactions',
   budgets: 'ffm.budgets',
+  recurringBills: 'ffm.recurringBills',
   savingsGoals: 'ffm.savingsGoals',
   user: 'ffm.user',
   achievements: 'ffm.achievements',

@@ -37,6 +37,7 @@
           <div class="tx-main">
             <div class="tx-title">
               <span>{{ renderTitle(t) }}</span>
+              <span v-if="t.recurringBillId" class="badge badge-recurring">周期</span>
               <span v-if="t.isLarge" class="badge badge-large">大额</span>
             </div>
             <div class="tx-meta">{{ renderMeta(t) }}</div>
@@ -284,6 +285,10 @@ const remove = (t) => {
 .tx-amount.transfer { color: var(--accent); }
 .type-seg {
   margin-bottom: 4px;
+}
+.badge-recurring {
+  color: var(--accent);
+  background: rgba(79, 141, 249, 0.12);
 }
 .field-check {
   margin-top: 6px;

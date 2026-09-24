@@ -37,6 +37,7 @@ export function normalizeTransaction(form) {
     isLarge: Boolean(form.isLarge),
     createdAt: Date.now()
   }
+  if (form.recurringBillId) base.recurringBillId = form.recurringBillId
   if (form.type === TRANSACTION_TYPES.TRANSFER) {
     return { ...base, type: TRANSACTION_TYPES.TRANSFER, fromAccountId: form.accountId, toAccountId: form.toAccountId }
   }

@@ -17,11 +17,13 @@ export function saveAccounts(accounts) {
 }
 
 export function normalizeAccount(form) {
+  const initialBalance = Number(form.initialBalance) || 0
   return {
     id: uid(),
     name: String(form.name || '').trim(),
     type: form.type,
-    initialBalance: Number(form.initialBalance) || 0
+    initialBalance,
+    balance: initialBalance
   }
 }
 
