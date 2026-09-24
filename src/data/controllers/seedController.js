@@ -5,6 +5,7 @@ import { loadAccounts, saveAccounts } from './accountController.js'
 import { saveTransactions } from './transactionController.js'
 import { saveBudgets } from './budgetController.js'
 import { saveGoals } from './savingsGoalController.js'
+import { saveRecurringBills } from './recurringController.js'
 import { saveUser } from './userController.js'
 
 let idCounter = 1
@@ -109,5 +110,55 @@ export function seedDemoData() {
   ])
 
   saveUser({ name: '我的家庭', createdAt: new Date().toISOString(), currency: 'CNY' })
+
+  const monthStart = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-01`
+  saveRecurringBills([
+    {
+      id: genId('rec'),
+      name: '每月工资',
+      type: TRANSACTION_TYPES.INCOME,
+      accountId: bank.id,
+      amount: 12000,
+      category: '工资',
+      cycle: 'monthly',
+      anchorDay: 28,
+      anchorWeekday: '1',
+      startDate: monthStart,
+      note: '自动入账的月度工资',
+      active: true,
+      createdAt: Date.now() - idCounter * 1000
+    },
+    {
+      id: genId('rec'),
+      name: '每月房租',
+      type: TRANSACTION_TYPES.EXPENSE,
+      accountId: alipay.id,
+      amount: 1800,
+      category: '住房',
+      cycle: 'monthly',
+      anchorDay: 5,
+      anchorWeekday: '1',
+      startDate: monthStart,
+      note: '自动扣款',
+      active: true,
+      createdAt: Date.now() - idCounter * 1000
+    },
+    {
+      id: genId('rec'),
+      name: '水电燃气费',
+      type: TRANSACTION_TYPES.EXPENSE,
+      accountId: alipay.id,
+      amount: 300,
+      category: '住房',
+      cycle: 'monthly',
+      anchorDay: 10,
+      anchorWeekday: '1',
+      startDate: monthStart,
+      note: '',
+      active: true,
+      createdAt: Date.now() - idCounter * 1000
+    }
+  ])
+
   storage.setJSON(STORAGE_KEYS.seedFlag, true)
 }

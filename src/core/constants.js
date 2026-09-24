@@ -18,6 +18,28 @@ export const EXPENSE_CATEGORIES = ['餐饮', '交通', '购物', '住房', '医�
 
 export const BUDGET_WARN_RATIO = 0.8
 
+export const RECURRING_CYCLES = {
+  DAILY: 'daily',
+  WEEKLY: 'weekly',
+  MONTHLY: 'monthly'
+}
+
+export const RECURRING_CYCLE_OPTIONS = [
+  { value: 'monthly', label: '每月' },
+  { value: 'weekly', label: '每周' },
+  { value: 'daily', label: '每天' }
+]
+
+export const WEEKDAY_OPTIONS = [
+  { value: '0', label: '周日' },
+  { value: '1', label: '周一' },
+  { value: '2', label: '周二' },
+  { value: '3', label: '周三' },
+  { value: '4', label: '周四' },
+  { value: '5', label: '周五' },
+  { value: '6', label: '周六' }
+]
+
 export const CHALLENGE_STREAKS = [7, 30]
 
 export const DEFAULT_GOAL_TYPE = 'savings'
@@ -33,5 +55,6 @@ export const STORAGE_KEYS = {
   achievements: 'ffm.achievements',
   points: 'ffm.points',
   claimedChallenges: 'ffm.claimedChallenges',
+  recurringBills: 'ffm.recurringBills',
   seedFlag: 'ffm.seeded.v1'
 }

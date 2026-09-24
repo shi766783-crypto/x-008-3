@@ -66,11 +66,11 @@ function reconcileAll() {
   saveAccounts(accounts.map((a) => ({ ...a, balance: balances.get(a.id) || 0 })))
 }
 
-export function addTransaction(form) {
+export function addTransaction(form, extra = {}) {
   const accounts = loadAccounts()
   if (!form.accountId || !form.amount) return null
   if (form.type === TRANSACTION_TYPES.TRANSFER && form.accountId === form.toAccountId) return null
-  const transaction = normalizeTransaction(form)
+  const transaction = { ...normalizeTransaction(form), ...extra }
   const nextAccounts = form.type === TRANSACTION_TYPES.TRANSFER
     ? applyTransfer(accounts, form.accountId, form.toAccountId, transaction.amount)
     : accounts.map((a) =>

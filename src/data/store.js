@@ -4,6 +4,7 @@ import * as controllers from './controllers/index.js'
 const store = reactive({
   accounts: [],
   transactions: [],
+  recurringBills: [],
   budgets: [],
   goals: [],
   user: {},
@@ -15,6 +16,7 @@ const store = reactive({
 const STORE_MAP = {
   accounts: () => controllers.account.loadAccounts(),
   transactions: () => controllers.transaction.loadTransactions(),
+  recurringBills: () => controllers.recurring.loadRecurringBills(),
   budgets: () => controllers.budget.loadBudgets(),
   goals: () => controllers.savingsGoal.loadGoals(),
   user: () => controllers.user.loadUser(),
